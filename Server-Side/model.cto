@@ -1,0 +1,16 @@
+/**
+ * My request network
+  */
+namespace org.example.osnet
+asset Request identified by requestID {
+    o String requestID
+    o Integer servingInstance
+    o Double serverLoad
+    o String operation
+    o String ip
+    o Integer timeToLive
+    --> Server owner
+}
+participant Server identified by serverID {
+        o String serverID
+}

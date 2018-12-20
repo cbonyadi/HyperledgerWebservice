@@ -1,0 +1,25 @@
+let rid = process.argv[2]                                                                                                                                                                                                                                                                                                                                                                                                             //console.log(rid)
+
+const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;                                                                                                                             
+var cardname = 'admin@641net';                                                                                                                                                                                      
+async function func() {                                                                                                                                                                                             
+    let bizNetworkConnection = new BusinessNetworkConnection();                                                                                                                                                     
+                                                                                                                                                                                                                    
+    let businessNetworkDefinition = await bizNetworkConnection.connect(cardname);                                                                                                                                   
+    let requestReg = await bizNetworkConnection.getAssetRegistry('org.example.osnet.Request');                                                                                                                      
+    let factory = businessNetworkDefinition.getFactory();                                                                                                                                                           
+    let request = await requestReg.get(rid);                                                                                                                                                                        
+                                                                                                                                                                                                                    
+    let serverReg = await bizNetworkConnection.getParticipantRegistry('org.example.osnet.Server');                                                                                                                  
+    let serverObj = await serverReg.get(request.servingInstance);                                                                                                                                                                    
+    let serverRelationship = factory.newRelationship('org.example.osnet', 'Server', serverObj.serverID);                                                                                                            
+                                                                                                                                                                                                                    
+    request.owner = serverRelationship;                                                                                                                                                                             
+                                                                                                                                                                                                                    
+    await requestReg.update(request);                                                                                                                                                                               
+                                                                                                                                                                                                                    
+    process.stdout.write("true");                                                                                                                                                                                   
+    process.exit();                                                                                                                                                                                                 
+}                                                                                                                                                                                                                   
+                                                                                                                                                                                                                    
+func();

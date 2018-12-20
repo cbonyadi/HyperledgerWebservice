@@ -1,0 +1,1 @@
+This client code is relatively generic, and can work with any multicast SOAP distributed webservice, so long as the service is load balanced, only allowing one system to return an answer, and the rest of the systems to either return "None" or a Fault.

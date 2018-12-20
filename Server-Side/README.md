@@ -1,0 +1,1 @@
+The code found in this folder enables a SOAP server to manage its load balancing with a model.cto specified hyperledger fabric.  Its services are simple, and the latency is large.  To make this effective, the services should be much larger and be more "batch-like" than simply returning the time or an addition function. 
